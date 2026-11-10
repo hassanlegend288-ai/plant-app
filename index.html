@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#07180e">
+    <title>PlantManager | Grow, Track & Profit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">🌿</div>
+            <h2>Plant<span>Manager</span></h2>
+            <p>Grow · Track · Profit</p>
+        </div>
+
+        <nav class="navigation">
+            <a href="#dashboard" class="nav-link active">⌂ Dashboard</a>
+            <a href="#plants" class="nav-link">🌿 My Plants</a>
+            <a href="#recordSale" class="nav-link">🛒 Record Sale</a>
+            <a href="#salesRecords" class="nav-link">▤ Sales Records</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <span>🌱 PlantManager</span>
+            <small>Your personal plant business</small>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" id="dashboard">
+
+        <!-- HEADER -->
+        <header class="topbar">
+
+            <div>
+                <p class="eyebrow">YOUR GARDEN</p>
+                <h1>Dashboard</h1>
+                <p class="subtitle">
+                    Your plant overview at a glance.
+                </p>
+            </div>
+
+            <div class="profile">🌱</div>
+
+        </header>
+
+
+        <!-- DASHBOARD STATISTICS -->
+        <section class="stats">
+
+            <div class="stat-card">
+                <span>Total Plants Left</span>
+                <h2 id="totalPlants">0 g</h2>
+                <p>Across all varieties</p>
+            </div>
+
+            <div class="stat-card">
+                <span>Total Spent</span>
+                <h2 id="totalSpent">£0.00</h2>
+                <p>Money spent buying plants</p>
+            </div>
+
+            <div class="stat-card">
+                <span>Total Sales</span>
+                <h2 id="totalSales">£0.00</h2>
+                <p>Money received from sales</p>
+            </div>
+
+            <div class="stat-card">
+                <span>Total Profit</span>
+                <h2 id="totalProfit">£0.00</h2>
+                <p>Your earnings after plant costs</p>
+            </div>
+
+        </section>
+
+
+        <!-- MAIN DASHBOARD GRID -->
+        <div class="dashboard-grid">
+
+
+            <!-- MY PLANTS -->
+            <section class="panel" id="plants">
+
+                <div class="section-heading">
+
+                    <div>
+                        <p class="eyebrow">INVENTORY</p>
+                        <h2>🌿 My Plants</h2>
+                    </div>
+
+                    <button onclick="showPlantForm()">
+                        + Add Plant
+                    </button>
+
+                </div>
+
+
+                <!-- ADD PLANT FORM -->
+                <form id="plantForm" class="plant-form hidden">
+
+                    <h3>Add a new plant</h3>
+
+                    <label for="plantName">Plant Name</label>
+                    <input
+                        id="plantName"
+                        type="text"
+                        placeholder="e.g. Monstera"
+                        required
+                    >
+
+                    <label for="plantAmount">Amount (grams)</label>
+                    <input
+                        id="plantAmount"
+                        type="number"
+                        min="0.01"
+                        step="0.01"
+                        placeholder="e.g. 250"
+                        required
+                    >
+
+                    <label for="plantCost">Total Cost (£)</label>
+                    <input
+                        id="plantCost"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        placeholder="e.g. 15.00"
+                        required
+                    >
+
+                    <div class="form-buttons">
+
+                        <button type="submit">
+                            Save Plant
+                        </button>
+
+                        <button
+                            type="button"
+                            class="cancel"
+                            onclick="hidePlantForm()"
+                        >
+                            Cancel
+                        </button>
+
+                    </div>
+
+                </form>
+
+
+                <!-- SEARCH -->
+                <input
+                    class="search"
+                    id="searchPlants"
+                    type="search"
+                    placeholder="Search your plants..."
+                >
+
+
+                <!-- PLANT TABLE -->
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Plant Name</th>
+                                <th>Amount</th>
+                                <th>Cost</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="plantList">
+
+                            <tr>
+                                <td colspan="4">
+                                    Your collection is empty.
+                                    Add your first plant!
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- RECORD A SALE -->
+            <section class="panel" id="recordSale">
+
+                <div class="section-heading">
+
+                    <div>
+                        <p class="eyebrow">TRANSACTIONS</p>
+                        <h2>🛒 Record a Sale</h2>
+                    </div>
+
+                </div>
+
+
+                <form id="saleForm" class="sale-form">
+
+                    <label for="salePlant">
+                        Plant Name
+                    </label>
+
+                    <select id="salePlant" required>
+                        <option value="">
+                            Select a plant
+                        </option>
+                    </select>
+
+
+                    <label for="saleAmount">
+                        Amount Sold (grams)
+                    </label>
+
+                    <input
+                        id="saleAmount"
+                        type="number"
+                        min="0.01"
+                        step="0.01"
+                        placeholder="e.g. 100"
+                        required
+                    >
+
+
+                    <label for="salePrice">
+                        Selling Price (£)
+                    </label>
+
+                    <input
+                        id="salePrice"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        placeholder="e.g. 10.00"
+                        required
+                    >
+
+
+                    <button type="submit" class="full-button">
+                        🛒 Record Sale
+                    </button>
+
+                </form>
+
+            </section>
+
+
+
+            <!-- STOCK REMAINING -->
+            <section class="panel" id="stockRemaining">
+
+                <div class="section-heading">
+
+                    <div>
+                        <p class="eyebrow">LIVE INVENTORY</p>
+                        <h2>📦 Stock Remaining</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="stock-overview">
+
+                    <div class="stock-total">
+
+                        <p>Total Amount of Plants Left</p>
+
+                        <h2 id="stockTotal">0 g</h2>
+
+                    </div>
+
+
+                    <div class="individual-stock">
+
+                        <h3>Individual Plant Stock</h3>
+
+                        <div id="stockList">
+
+                            <p class="empty-message">
+                                No stock available yet.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- SALES RECORDS -->
+            <section class="panel" id="salesRecords">
+
+                <div class="section-heading">
+
+                    <div>
+                        <p class="eyebrow">TRANSACTION HISTORY</p>
+                        <h2>▤ Sales Records</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Plant Name</th>
+                                <th>Amount</th>
+                                <th>Sale Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="salesList">
+
+                            <tr>
+                                <td colspan="5">
+                                    No sales recorded yet.
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+
+        <!-- FOOTER -->
+        <footer>
+            PlantManager © 2026 · Grow · Track · Profit
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
